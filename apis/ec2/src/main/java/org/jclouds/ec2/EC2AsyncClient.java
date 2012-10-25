@@ -20,6 +20,7 @@ package org.jclouds.ec2;
 
 import java.util.Set;
 
+import org.jclouds.ec2.features.TagAsyncApi;
 import org.jclouds.ec2.features.WindowsAsyncApi;
 import org.jclouds.ec2.services.AMIAsyncClient;
 import org.jclouds.ec2.services.AvailabilityZoneAndRegionAsyncClient;
@@ -112,4 +113,17 @@ public interface EC2AsyncClient {
    @Beta
    WindowsAsyncApi getWindowsApiForRegion(
             @EndpointParam(parser = RegionToEndpointOrProviderIfNull.class) @Nullable String region);
+
+   /**
+    * Provides asynchronous access to Tag features.
+    */
+   @Delegate
+   @Beta
+   TagAsyncApi getTagApi();
+
+   @Delegate
+   @Beta
+   TagAsyncApi getTagApiForRegion(
+            @EndpointParam(parser = RegionToEndpointOrProviderIfNull.class) @Nullable String region);
+
 }

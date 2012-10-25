@@ -22,6 +22,7 @@ import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import org.jclouds.concurrent.Timeout;
+import org.jclouds.ec2.features.TagApi;
 import org.jclouds.ec2.features.WindowsApi;
 import org.jclouds.ec2.services.AMIClient;
 import org.jclouds.ec2.services.AvailabilityZoneAndRegionClient;
@@ -113,6 +114,18 @@ public interface EC2Client {
    @Delegate
    @Beta
    WindowsApi getWindowsApiForRegion(
+            @EndpointParam(parser = RegionToEndpointOrProviderIfNull.class) @Nullable String region);
+   
+   /**
+    * Provides synchronous access to Tag features.
+    */
+   @Delegate
+   @Beta
+   TagApi getTagApi();
+
+   @Delegate
+   @Beta
+   TagApi getTagApiForRegion(
             @EndpointParam(parser = RegionToEndpointOrProviderIfNull.class) @Nullable String region);
 
 }

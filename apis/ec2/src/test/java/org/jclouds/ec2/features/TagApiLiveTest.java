@@ -16,27 +16,18 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package org.jclouds.aws.ec2.binders;
+package org.jclouds.ec2.features;
 
-import static com.google.common.base.Preconditions.checkArgument;
-import static com.google.common.base.Preconditions.checkNotNull;
-
-import javax.inject.Singleton;
-
-import org.jclouds.aws.util.AWSUtils;
-import org.jclouds.http.HttpRequest;
-import org.jclouds.rest.Binder;
+import org.jclouds.ec2.internal.BaseEC2ClientLiveTest;
+import org.testng.annotations.Test;
 
 /**
- * Binds Ids to query parameters named with ResourceId.index
- * 
- * @author grkvlt@apache.org
+ * @author Adrian Cole
  */
-@Singleton
-public class BindResourceIdsToIndexedFormParams implements Binder {
-    @Override
-    public <R extends HttpRequest> R bindToRequest(R request, Object input) {
-        checkArgument(checkNotNull(input, "input") instanceof Iterable, "this binder is only valid for Iterable<String>");
-        return AWSUtils.indexIterableToFormValuesWithPrefix(request, "ResourceId", input);
-    }
+@Test(groups = "live")
+public class TagApiLiveTest extends BaseEC2ClientLiveTest {
+ 
+   protected TagApi api() {
+      return context.getApi().getTagApi();
+   }
 }
